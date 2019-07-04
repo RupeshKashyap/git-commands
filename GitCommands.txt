@@ -10,7 +10,7 @@ _A list of my commonly used Git commands_
 
 --
 git config --global user.name ""
-git config --global email 
+git config --global user.email "rupeshkashyap1996@gmail.com" 
 
 ### Getting & Creating Projects
 
