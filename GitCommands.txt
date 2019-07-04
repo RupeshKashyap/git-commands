@@ -1,0 +1,248 @@
+netstat -ano | findstr 4200
+taskkill /pid 3344 /f
+
+Git Commands
+============
+
+_A list of my commonly used Git commands_
+
+*If you are interested in my Git aliases, have a look at my `.bash_profile`, found here: https://github.com/joshnh/bash_profile/blob/master/.bash_profile*
+
+--
+git config --global user.name ""
+git config --global email 
+
+### Getting & Creating Projects
+
+| Command | Description |
+| ------- | ----------- |
+| `git init` | Initialize a local Git repository |
+| `git clone ssh://git@github.com/[username]/[repository-name].git` | Create a local copy of a remote repository |
+
+### Basic Snapshotting
+
+| Command | Description |
+| ------- | ----------- |
+| `git status` | Check status |
+| `git add [file-name.txt]` | Add a file to the staging area |
+| `git add -A` | Add all new and changed files to the staging area |
+| `git commit -m "[commit message]"` | Commit changes |
+| `git rm -r [file-name.txt]` | Remove a file (or folder) |
+
+### Branching & Merging
+
+| Command | Description |
+| ------- | ----------- |
+| `git branch` | List branches (the asterisk denotes the current branch) |
+| `git branch -a` | List all branches (local and remote) |
+| `git branch [branch name]` | Create a new branch |
+| `git branch -d [branch name]` | Delete a branch |
+| `git push origin --delete [branchName]` | Delete a remote branch |
+| `git checkout -b [branch name]` | Create a new branch and switch to it |
+| `git checkout -b [branch name] origin/[branch name]` | Clone a remote branch and switch to it |
+| `git checkout [branch name]` | Switch to a branch |
+| `git checkout -` | Switch to the branch last checked out |
+| `git checkout -- [file-name.txt]` | Discard changes to a file |
+| `git merge [branch name]` | Merge a branch into the active branch |
+| `git merge [source branch] [target branch]` | Merge a branch into a target branch |
+| `git stash` | Stash changes in a dirty working directory |
+| `git stash clear` | Remove all stashed entries |
+
+### Sharing & Updating Projects
+
+| Command | Description |
+| ------- | ----------- |
+| `git push origin [branch name]` | Push a branch to your remote repository |
+
+git push remote-name HEAD:development
+
+| `git push -u(or --set-upstream) origin [branch name]` | Push changes to remote repository (and remember the branch) |
+| `git push` | Push changes to remote repository (remembered branch) |
+| `git push origin --delete [branch name]` | Delete a remote branch |
+| `git pull` | Update local repository to the newest commit |
+| `git pull origin [branch name]` | Pull changes from remote repository |
+| `git remote add origin ssh://git@github.com/[username]/[repository-name].git` | Add a remote repository |
+| `git remote set-url origin ssh://git@github.com/[username]/[repository-name].git` | Set a repository's origin branch to SSH |
+
+### Inspection & Comparison
+
+| Command | Description |
+| ------- | ----------- |
+| `git log` | View changes |
+| `git log --summary` | View changes (detailed) |
+| `git diff [source branch] [target branch]` | Preview changes before merging |
+
+
+Git task	Notes	Git commands
+1> Tell Git who you are	Configure the author name and email address to be used with your commits.
+	Note that Git strips some characters (for example trailing periods) from user.name.
+
+		git config --global user.name "Sam Smith"
+		git config --global user.email sam@example.com
+
+2> Create a new local repository	 	
+		git init
+
+3> Check out a repository	Create a working copy of a local repository:	
+		git clone /path/to/repository
+
+4> For a remote server, use:	
+		git clone username@host:/path/to/repository
+
+5> Add files	Add one or more files to staging (index):	
+		git add <filename>
+
+		git add *
+6> Commit	Commit changes to head (but not yet to the remote repository):	
+		git commit -m "Commit message"
+
+7> Commit any files you've added with git add, and also commit any files you've changed since then:	
+		git commit -a
+
+8> Push	Send changes to the master branch of your remote repository:	
+		git push origin master
+
+9> Status	List the files you've changed and those you still need to add or commit:	
+		git status
+
+
+11> List all currently configured remote repositories:	
+		git remote -v
+
+12> Branches	Create a new branch and switch to it:	
+		git checkout -b <branchname>
+
+13> Switch from one branch to another:	
+		git checkout <branchname>
+
+14> List all the branches in your repo, and also tell you what branch you're currently in:	
+		git branch
+
+15> Delete the feature branch:	
+		git branch -d <branchname>
+
+16> Push the branch to your remote repository, so others can use it:	
+		git push origin <branchname>
+
+17> Push all branches to your remote repository:	
+		git push --all origin
+
+18> Delete a branch on your remote repository:	
+		git push  <REMOTENAME> :<BRANCHNAME> 
+
+		Note that there is a space before the colon. The command resembles the same steps you'd take to rename a branch. However, here, you're telling Git to push nothing into BRANCHNAME on REMOTENAME. Because of this, git push deletes the branch on the remote repository.
+
+19> Update from the remote repository	Fetch and merge changes on the remote server to your working directory:	
+		git pull
+
+20> To merge a different branch into your active branch:	
+		git merge <branchname>
+
+21> View all the merge conflicts:
+	View the conflicts against the base file:
+
+	Preview changes, before merging:
+
+		git diff
+		git diff --base <filename>
+
+		git diff <sourcebranch> <targetbranch>
+
+22> After you have manually resolved any conflicts, you mark the changed file:	
+		git add <filename>
+
+23> Tags	You can use tagging to mark a significant changeset, such as a release:	
+		git tag 1.0.0 <commitID>
+
+24> CommitId is the leading characters of the changeset ID, up to 10, but must be unique. Get the ID using:	
+		git log
+
+25> Push all tags to remote repository:	
+		git push --tags origin
+
+26> Undo local changes	If you mess up, you can replace the changes in your working tree with the last content in head:
+	Changes already added to the index, as well as new files, will be kept.
+
+		git checkout -- <filename>
+
+27> Instead, to drop all your local changes and commits, fetch the latest history from the server and point your local master branch at it:	
+		
+		git fetch origin
+
+		git reset --hard origin/master (in this case origin is remote repo name)
+
+28> Search	Search the working directory for foo():	
+		git grep "foo()"
+
+29> Update the submodule:
+		git submodule update --init --recursive
+ 
+30> Revert the commit
+	git checkout develop
+	git reset --hard commit-id
+	git push -f origin develop
+
+31> Renaming branches
+	git push  <REMOTENAME> <LOCALBRANCHNAME>:<REMOTEBRANCHNAME>
+	-------->This pushes the LOCALBRANCHNAME to your REMOTENAME, but it is renamed to REMOTEBRANCHNAME.
+
+32> To be able to check which upstream you are currently referring to run:
+
+	git branch -avv
+
+33>Pulling from a different branch
+	This is using the same syntax for pushing
+
+	git pull origin master:dev
+	
+	This updates your local dev branch using the remote origin master branch
+
+34> git rev-list --count @{u}..HEAD: how many commits do you have on B that are not on origin/B?
+	git rev-list --count HEAD..@{u}: how many commits do you have on origin/B that are not on B?
+
+35>  Create Fork from GUI. Then follow the below steps to define the upstream.
+
+	git clone https://gitlab.com/ashoka.kumara/ForecastingSystemBackend.git
+
+
+	git remote add upstream https://gitlab.com/TeleRadio/ForecastingSystemBackend.git
+
+	Rebase the local to get latest from devlopment
+
+	git checkout Development
+	git fetch upstream
+	git rebase upstream/Development
+
+	Create a branch depending on ticket you are working.
+
+	git fetch upstream
+	git branch --no-track FORECAST-7688 upstream/Development
+	git checkout FORECAST-7688
+	git push --set-upstream origin FORECAST-7688
+
+36> # list all tags
+	git tag
+
+	# list all tags with given pattern ex: v-
+	git tag --list 'v-*'
+
+37> # Update the local git repo with the latest tags from all remotes
+	git fetch --all
+
+	# checkout the specific tag
+	git checkout tags/<tag> -b <branch>
+
+38> git tag -a <tag_name> <commit_id SHA1> -m "Message here"
+
+39> git reset --hard HEAD^1 will take you back one commit from what you pulled. If you want it back to the state it was in 		before you pulled, use git reset --hard HEAD@{1}. The @{1} tracks where the head was at before the last operation that 		changed it in your local repo, so it will go back several commits if several were pushed before you did your pull. Also 	see git reflog to show the entire list
+
+40> clone from specific branch   -> git clone --single-branch --branch <BranchName> <URL>
+
+41> git push origin <your_branch_name> --force OR git push origin <your_branch_name> -f
+
+42> discard all -> For all unstaged files in current working directory use:  ( git checkout -- . )
+
+43> git stash save --keep-index --include-untracked
+You don't need to include --include-untracked if you don't want to be thorough about it.
+
+After that, you can drop that stash with a git stash drop command if you like.
