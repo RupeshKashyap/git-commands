@@ -1,1 +1,5 @@
 System.out.println("I love git")
+
+
+after the cloning 
+System.out.println("i hate git");
